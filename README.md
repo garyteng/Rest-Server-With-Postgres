@@ -16,7 +16,7 @@ Install Postgres, Create User & Database & Table, and Insert some Test Data
 | --- | --- | --- |
 | 1 | apple | 10 |
 | 2 | banana | 20 |
-| 3 | orangeorange | 30 |
+| 3 | orange | 30 |
 
 ```
 ./resource/createDatabase.sh

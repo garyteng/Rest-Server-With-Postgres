@@ -7,10 +7,10 @@ Simple Rest API Server with Postgres Database
 Install GO dependencies
 
 ```
-. ./resource/installDependency.sh
+./resource/installDependency.sh
 ```
 
-Install Postgres, Create User & Database & Table ,and Insert some Test Data
+Install Postgres, Create User & Database & Table, and Insert some Test Data
 
 | id | name | price |
 | --- | --- | --- |
@@ -19,7 +19,7 @@ Install Postgres, Create User & Database & Table ,and Insert some Test Data
 | 3 | orangeorange | 30 |
 
 ```
-. ./resource/createDatabase.sh
+./resource/createDatabase.sh
 ```
 
 ## Running the program
@@ -30,17 +30,22 @@ go run main.go
 
 ## API
 
+### HTTP Get Request to helloworld
+```
+"/helloworld"
+```
+
 ### HTTP Get Request to Query item with {id}
 ```
-. "/items/{id}"
+"/items/{id}"
 ```
 
 ### HTTP Post Request to Insert item with {name} & {price}
 ```
-. "/items/{name}/{price}"
+"/items/{name}/{price}"
 ```
 
 ### HTTP Delete Request to Query item with {id}
 ```
-. "/items/{id}"
+"/items/{id}"
 ```

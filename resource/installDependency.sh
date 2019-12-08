@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Dependencies for you
+# Install Go Dependencies for you
 
 # Install mux server
 go get -u github.com/gorilla/mux

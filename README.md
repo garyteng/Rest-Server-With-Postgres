@@ -45,7 +45,7 @@ go run main.go
 "/items/{name}/{price}"
 ```
 
-### HTTP Delete Request to Query item with {id}
+### HTTP Delete Request to Delete item with {id}
 ```
 "/items/{id}"
 ```

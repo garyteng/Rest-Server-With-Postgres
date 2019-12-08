@@ -1,0 +1,9 @@
+{
+    "Url": "localhost",
+    "Port": 8080,
+
+    "DB_Url":	  "localhost",
+    "DB_User":    "db_user",
+    "DB_Pwd": 	  "db_pwd",
+    "DB_Name":	  "db_name"
+}

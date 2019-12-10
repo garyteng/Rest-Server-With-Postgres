@@ -16,7 +16,7 @@ Install Postgres, Create User & Database & Table, and Insert some Test Data
 | --- | --- | --- |
 | 1 | apple | 10 |
 | 2 | banana | 20 |
-| 3 | orangeorange | 30 |
+| 3 | orange | 30 |
 
 ```
 ./resource/createDatabase.sh
@@ -45,7 +45,7 @@ go run main.go
 "/items/{name}/{price}"
 ```
 
-### HTTP Delete Request to Query item with {id}
+### HTTP Delete Request to Delete item with {id}
 ```
 "/items/{id}"
 ```

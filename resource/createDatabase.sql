@@ -2,7 +2,7 @@ create database db_name;
 create user db_user with encrypted password 'db_pwd';
 grant all privileges on database db_name to db_user;
 
-\c db_name;
+\c db_name; -- switch database
 
 CREATE TABLE items(
    id serial PRIMARY KEY,

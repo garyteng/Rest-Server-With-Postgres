@@ -16,10 +16,10 @@ type Configuration struct {
     Url               string
     Port              int
     // DateBase
-    DB_Url            string
-    DB_User           string
-    DB_Pwd            string
-    DB_Name           string
+    DbUrl            string
+    DbUser           string
+    DbPwd            string
+    DbName           string
 }
 
 type ItemRow struct {
@@ -40,13 +40,13 @@ func (config *Configuration) getOneItem(w http.ResponseWriter, r *http.Request) 
     
     // Connect to the DB, panic if failed
     // "postgres://user:password@localhost/dbName?sslmode=disable"
-    db_connect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
-                                config.DB_User,
-                                config.DB_Pwd,
-                                config.Url,
-                                config.DB_Name)
+    dbConnect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
+                                config.DbUser,
+                                config.DbPwd,
+                                config.DbUrl,
+                                config.DbName)
 
-    db, err := sql.Open("postgres", db_connect)
+    db, err := sql.Open("postgres", dbConnect)
     if err != nil {
         fmt.Println(`Could not connect to db`)
         panic(err)
@@ -74,13 +74,13 @@ func (config *Configuration) deleteOneItem(w http.ResponseWriter, r *http.Reques
     
     // Connect to the DB, panic if failed
     // "postgres://user:password@localhost/dbName?sslmode=disable"
-    db_connect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
-                                config.DB_User,
-                                config.DB_Pwd,
-                                config.Url,
-                                config.DB_Name)
+    dbConnect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
+                                config.DbUser,
+                                config.DbPwd,
+                                config.DbUrl,
+                                config.DbName)
 
-    db, err := sql.Open("postgres", db_connect)
+    db, err := sql.Open("postgres", dbConnect)
     if err != nil {
         fmt.Println(`Could not connect to db`)
         panic(err)
@@ -109,13 +109,13 @@ func (config *Configuration) createOneItem(w http.ResponseWriter, r *http.Reques
     
     // Connect to the DB, panic if failed
     // "postgres://user:password@localhost/dbName?sslmode=disable"
-    db_connect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
-                                config.DB_User,
-                                config.DB_Pwd,
-                                config.Url,
-                                config.DB_Name)
+    dbConnect := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable",
+                                config.DbUser,
+                                config.DbPwd,
+                                config.DbUrl,
+                                config.DbName)
 
-    db, err := sql.Open("postgres", db_connect)
+    db, err := sql.Open("postgres", dbConnect)
     if err != nil {
         fmt.Println(`Could not connect to db`)
         panic(err)

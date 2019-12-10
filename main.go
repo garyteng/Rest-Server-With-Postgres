@@ -5,8 +5,10 @@ import (
     "log"
     "net/http"
     "os"
+
     "github.com/gorilla/mux"
     "github.com/tkanos/gonfig"
+    
     "database/sql"
     _ "github.com/lib/pq"
 )
@@ -66,7 +68,10 @@ func (config *Configuration) getOneItem(w http.ResponseWriter, r *http.Request) 
         rows.Scan(&row.id, &row.name, &row.price)
         output := fmt.Sprintf("{id:%d, name:%s, price:%d}", row.id, row.name, row.price)
         fmt.Fprintf(w, output)
+        return
     }
+
+    fmt.Fprintf(w, `{id : -1, msg : "not found"}`)
 
 }
 
@@ -98,9 +103,9 @@ func (config *Configuration) deleteOneItem(w http.ResponseWriter, r *http.Reques
 
     count, _ := rows.RowsAffected()  
     if count ==1 {
-        fmt.Fprintf(w, "success")
+        fmt.Fprintf(w, "{msg : success}")
     }else{
-        fmt.Fprintf(w, "fail")
+        fmt.Fprintf(w, "{msg : fail}")
     }
 
 }
@@ -123,22 +128,19 @@ func (config *Configuration) createOneItem(w http.ResponseWriter, r *http.Reques
     defer db.Close()
 
     // Start to Create
+    returnId := -1
     name := mux.Vars(r)["name"]
     price := mux.Vars(r)["price"]
-    query := "INSERT INTO items(name, price) VALUES($1, $2)"
-    rows, err := db.Exec(query, name, price)
-    // fmt.Println(rows)
+    query := "INSERT INTO items(name, price) VALUES($1, $2) RETURNING id"
+    err = db.QueryRow(query, name, price).Scan(&returnId)
+
     if err != nil {
-        panic(err)
-    }
-
-    count, _ := rows.RowsAffected()  
-    if count ==1 {
-        fmt.Fprintf(w, "success")
+        fmt.Fprintf(w, `{id : -1, msg : "item already exists"}`)
+        // panic(err)
     }else{
-        fmt.Fprintf(w, "fail")
+        result := fmt.Sprintf("{id : %d}", returnId)
+        fmt.Fprintf(w, result)
     }
-
 }
 
 func main() {
@@ -152,11 +154,6 @@ func main() {
 
     fmt.Printf("Using Url: %s  \n",config.Url);
     fmt.Printf("Using Port: %d \n",config.Port);
-
-    // fmt.Printf("Using DB_Url: %s  \n",config.DB_Url);
-    // fmt.Printf("Using DB_Port: %s \n",config.DB_User);
-    // fmt.Printf("Using DB_Url: %s  \n",config.DB_Pwd);
-    // fmt.Printf("Using DB_Port: %s \n",config.DB_Name);
 
     router := mux.NewRouter().StrictSlash(true)
     router.HandleFunc("/", home)
